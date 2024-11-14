@@ -22,6 +22,7 @@ def run(command: list, cwd: Path = None):
     if cwd is not None and not cwd.exists():
         logging.fatal(f"{cwd} does not exist")
 
-    command_msg = " ".join(map(str, command))
+    command_str = list(map(str, command))
+    command_msg = " ".join(command_str)
     logging.info(f"⏵ {command_msg}")
-    subprocess.run(command, cwd=cwd)
+    subprocess.run(command_str, cwd=cwd)
