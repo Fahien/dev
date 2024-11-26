@@ -103,6 +103,7 @@ class Config:
                 required=False,
                 default=param_default,
                 help=help_message,
+                choices=choices,
             )
             default_index += 1
         else:
