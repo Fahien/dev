@@ -41,3 +41,5 @@ class Project(metaclass=DerivationRegistry):
     def __init__(self, name: str):
         self.name = name
         self.project_path = util.get_workspace_path().joinpath(name)
+        self.build_path = self.project_path.joinpath("build")
+        self.install_path = self.build_path.joinpath("install")
