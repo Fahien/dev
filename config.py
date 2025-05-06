@@ -53,11 +53,8 @@ class Config:
         command_subparsers = project_parser.add_subparsers(dest="command", required=True)
         for elem_name in dir(project.__class__):
             elem = getattr(project.__class__, elem_name)
-            from project import command
-
-            if isinstance(elem, command):
-                command = getattr(project, elem_name)
-                Config.add_command_parser(command_subparsers, project, command.method)
+            if hasattr(elem, "wrapped"):
+                Config.add_command_parser(command_subparsers, project, elem)
 
     @staticmethod
     def add_command_parser(

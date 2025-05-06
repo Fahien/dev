@@ -1,5 +1,5 @@
 from enum import Enum
-from functools import reduce
+from functools import reduce, wraps
 from pathlib import Path
 
 import util
@@ -29,9 +29,13 @@ class DerivationRegistry(type):
         )
 
 
-class command:
-    def __init__(self, m):
-        self.method = m
+def command(method):
+    @wraps(method)
+    def decorated(*args, **kwargs):
+        return method(*args, **kwargs)
+
+    decorated.wrapped = True
+    return decorated
 
 
 class Project(metaclass=DerivationRegistry):
