@@ -18,11 +18,11 @@ def get_workspace_path() -> Path:
     return workspace_path
 
 
-def run(command: list, cwd: Path = None):
+def run(command: list, cwd: Path = None, shell=False):
     if cwd is not None and not cwd.exists():
         logging.fatal(f"{cwd} does not exist")
 
     command_str = list(map(str, command))
     command_msg = " ".join(command_str)
     logging.info(f"⏵ {command_msg}")
-    subprocess.run(command_str, cwd=cwd)
+    subprocess.run(command_str, cwd=cwd, shell=shell)
